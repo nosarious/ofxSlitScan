@@ -180,7 +180,7 @@ void ofxSlitScan::setDelayMap(float* mappix){
 }
 
 void ofxSlitScan::setDelayMap(ofBaseHasPixels& map){
-    setDelayMap(map.getPixelsRef());
+    setDelayMap(map.getPixels());
 }
 
 void ofxSlitScan::setDelayMap(ofPixels& map){
@@ -212,7 +212,7 @@ void ofxSlitScan::addImage(unsigned char* image){
 	outputIsDirty = true;	
 }
 void ofxSlitScan::addImage(ofBaseHasPixels& image){
-    addImage(image.getPixelsRef());
+    addImage(image.getPixels());
 }
 
 void ofxSlitScan::addImage(ofPixels& image){
@@ -220,22 +220,22 @@ void ofxSlitScan::addImage(ofPixels& image){
 		ofLog(OF_LOG_ERROR, "ofxSlitScan -- adding image of the wrong type");
 		return;
 	}
-	addImage( image.getPixels() );
+	addImage(image.getPixels());
 }
 
 ofImage& ofxSlitScan::getOutputImage(){
 	if(outputIsDirty){
 		//calculate the new distorted image
-		unsigned char* writebuffer = outputImage.getPixels();
+		unsigned char* writebuffer = outputImage.getPixels().getData();
 		unsigned char* outbuffer = writebuffer;
 		
 		int x, y, offset, lower_offset, upper_offset, pixelIndex;
 		float precise, alpha, invalpha;	
 		int mapMin = capacity - timeDelay - timeWidth;// (time_delay + time_width);
 		int mapMax = capacity - 1 - timeDelay;// - time_delay;
-        int mapRange = mapMax - mapMin;
-        int n = width * height;
-        pixelIndex = 0;
+        	int mapRange = mapMax - mapMin;
+        	int n = width * height;
+        	pixelIndex = 0;
         
 		if(blend){
 			for(int i = 0; i < n; i++) {
@@ -284,7 +284,7 @@ ofImage& ofxSlitScan::getOutputImage(){
 
 ofImage& ofxSlitScan::getDelayMap(){
 	if(delayMapIsDirty){
-		unsigned char* pix = delayMapImage.getPixels();
+		unsigned char* pix = delayMapImage.getPixels().getData();
 		for(int i = 0; i < width*height; i++){
 			pix[i] = char(delayMapPixels[i]*255);
 		}
