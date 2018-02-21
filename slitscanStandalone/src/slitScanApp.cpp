@@ -118,10 +118,15 @@ void slitScanApp::initLiveVideo(){
 		vidPlayer.close();
 	}
 		
+	
+	vidGrabber.listDevices();
+	vidGrabber.setDeviceID(10); //???why???
+	
+	//for Microsoft Surface 0=back camera, 1 = front camera
+    	//vidGrabber.setDeviceID(1); 
+	
 	vidGrabber.initGrabber(WIDTH,HEIGHT);	
 
-	vidGrabber.listDevices();
-	vidGrabber.setDeviceID(10);
 
 }
 
