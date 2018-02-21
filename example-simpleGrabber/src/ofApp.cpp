@@ -20,6 +20,8 @@ void ofApp::setup(){
     //note that the delay cannot be more than the total capacity
     slitScan.setTimeDelayAndWidth(0, 120);
     
+    //for Microsoft Surface 0=back camera, 1 = front camera
+    //grabber.setDeviceID(1); 
     //set up the grabber
     grabber.initGrabber(640, 480);
 }
